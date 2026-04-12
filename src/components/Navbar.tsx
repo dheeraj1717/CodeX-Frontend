@@ -1,51 +1,54 @@
-function Navbar() {
-    return (
-        <div className="navbar bg-base-100 border-b-2 h-[55px]">
-            <div className="navbar-start">
-                <div className="dropdown">
-                <label htmlFor="my-drawer">
-                    <div role="button" className="btn btn-ghost btn-circle">
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
-                        
-                    </div>
-                </label>
-                </div>
-            </div>
-            <div className="navbar-center">
-                <a className="btn btn-ghost text-xl">AlgoCode</a>
-            </div>
-            <div className="navbar-end">
-                <div className="dropdown dropdown-end">
-                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
-                    <div className="indicator">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
-                    <span className="badge badge-sm indicator-item">8</span>
-                    </div>
-                </div>
-                <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
-                </div>
-                </div>
-                <div className="dropdown dropdown-end">
-                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                    <div className="w-10 rounded-full">
-                    <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                    </div>
-                </div>
-                <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                    <li>
-                    <a className="justify-between">
-                        Profile
-                        <span className="badge">New</span>
-                    </a>
-                    </li>
-                    <li><a>Settings</a></li>
-                    <li><a>Logout</a></li>
-                </ul>
-                </div>
-            </div>
-        </div>
-    );
-}
+import { Link, useLocation } from 'react-router-dom';
 
-export default Navbar;
+const LightningIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+  </svg>
+);
+
+const navLinks = [
+  { label: 'Problems', to: '/problems' },
+  { label: 'Contests', to: '#' },
+  { label: 'Leaderboard', to: '#' },
+];
+
+export default function Navbar() {
+  const location = useLocation();
+
+  return (
+    <nav className="cx-navbar">
+      {/* Logo */}
+      <Link to="/problems" className="cx-logo" style={{ marginRight: 8 }}>
+        <span style={{ color: 'var(--accent-green)' }}><LightningIcon /></span>
+        Code<span className="accent">X</span>
+      </Link>
+
+      {/* Nav links */}
+      <div className="cx-nav-links">
+        {navLinks.map((link) => (
+          <Link
+            key={link.label}
+            to={link.to}
+            className={`cx-nav-link ${location.pathname.startsWith(link.to) && link.to !== '#' ? 'active' : ''}`}
+          >
+            {link.label}
+          </Link>
+        ))}
+      </div>
+
+      {/* Right side */}
+      <div className="cx-navbar-right">
+        <div style={{
+          fontSize: '0.78rem', color: 'var(--text-muted)',
+          padding: '4px 10px', background: 'var(--bg-tertiary)',
+          borderRadius: '6px', border: '1px solid var(--border)',
+          whiteSpace: 'nowrap'
+        }}>
+          🔥 <span style={{ color: 'var(--accent-orange)', fontWeight: 600 }}>7</span> day streak
+        </div>
+
+        <div className="cx-avatar" title="Profile">U</div>
+      </div>
+    </nav>
+  );
+}
