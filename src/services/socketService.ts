@@ -6,7 +6,7 @@ export function getSocket(): Socket {
   if (!socket) {
     const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || 'http://localhost:4005';
     socket = io(SOCKET_URL, {
-      transports: ['websocket'],
+      transports: ['polling', 'websocket'],
       autoConnect: true,
     });
   }
