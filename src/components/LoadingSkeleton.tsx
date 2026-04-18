@@ -9,6 +9,6 @@ export function SkeletonRow() {
   );
 }
 
-export function SkeletonBlock({ className = '' }: { className?: string }) {
-  return <div className={`skeleton ${className}`} />;
+export function SkeletonBlock({ className = '', style = {} }: { className?: string, style?: React.CSSProperties }) {
+  return <div className={`skeleton ${className}`} style={style} />;
 }
