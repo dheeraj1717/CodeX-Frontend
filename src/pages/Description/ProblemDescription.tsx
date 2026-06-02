@@ -60,13 +60,14 @@ function ConsolePanel({
 
   if (submitting) {
     return (
-      <div className="cx-result-pending" style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '20px' }}>
+      <div className="cx-result-pending" style={{ display: 'flex',   alignItems: 'center', gap: 12, padding: '20px' }}>
         <span className="cx-spinner" />
         <span style={{ fontWeight: 500, color: 'var(--text-secondary)' }}>Running your code...</span>
       </div>
     );
   }
 
+  
   const cases = problem?.testCases || [];
   const results = result?.testCaseResults || [];
   const totalCases = Math.max(cases.length, results.length);
